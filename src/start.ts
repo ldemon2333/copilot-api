@@ -117,6 +117,9 @@ export async function runServer(options: RunServerOptions): Promise<void> {
   serve({
     fetch: server.fetch as ServerHandler,
     port: options.port,
+    // Bun closes connections that stay silent for 10s by default, which cuts
+    // SSE streams while a reasoning model is still thinking.
+    bun: { idleTimeout: 0 },
   })
 }
 
