@@ -15,6 +15,9 @@ RUN bun install --frozen-lockfile --production --ignore-scripts --no-cache
 
 COPY --from=builder /app/dist ./dist
 
+# The server binds to loopback unless told otherwise; listen on all
+# interfaces inside the container so the published port works.
+ENV COPILOT_API_HOST=0.0.0.0
 EXPOSE 4141
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \

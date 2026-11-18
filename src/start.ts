@@ -116,6 +116,9 @@ export async function runServer(options: RunServerOptions): Promise<void> {
 
   serve({
     fetch: server.fetch as ServerHandler,
+    // Loopback by default: the proxy spends the logged-in Copilot quota and
+    // has no auth of its own. Set COPILOT_API_HOST (e.g. 0.0.0.0) to expose it.
+    hostname: process.env.COPILOT_API_HOST || "127.0.0.1",
     port: options.port,
     // Bun closes connections that stay silent for 10s by default, which cuts
     // SSE streams while a reasoning model is still thinking.

@@ -164,6 +164,11 @@ The following command line options are available for the `start` command:
 | --show-token   | Show GitHub and Copilot tokens on fetch and refresh                           | false      | none  |
 | --proxy-env    | Initialize proxy from environment variables                                   | false      | none  |
 
+The server listens on `127.0.0.1` by default, because anyone who can reach it
+can spend your Copilot quota. Set the `COPILOT_API_HOST` environment variable
+(for example `COPILOT_API_HOST=0.0.0.0`) to listen on other interfaces. The
+Docker image sets it to `0.0.0.0`.
+
 ### Auth Command Options
 
 | Option       | Description               | Default | Alias |
